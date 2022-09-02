@@ -38,7 +38,9 @@ function App() {
         datafileId: "91445662",
       });
 
-      const response = await fetch("http://localhost:8000/request?" + params);
+      const response = await fetch("http://localhost:8000/request?" + params, {
+        method: "POST",
+      });
       const request: DownloadRequest = JSON.parse(await response.text());
 
       setDownloadRequest(request);
@@ -54,8 +56,6 @@ function App() {
   }, [downloadRequest, pollInterval.current, pollProgress]);
 
   const filePath = downloadRequest?.path;
-
-  console.log("filePath", filePath);
 
   return filePath ? (
     <H5GroveProvider
